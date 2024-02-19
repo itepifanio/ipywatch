@@ -2,8 +2,8 @@ project:
   output-dir: _docs
 
 website:
-  title: "debugbar"
-  site-url: "https://itepifanio.github.io/debugbar"
+  title: "ipywatch"
+  site-url: "https://itepifanio.github.io/ipywatch"
   description: "A debugbar tool for ipywidgets/reacton/solara"
   repo-branch: main
-  repo-url: "https://github.com/itepifanio/debugbar"
+  repo-url: "https://github.com/itepifanio/ipywatch"

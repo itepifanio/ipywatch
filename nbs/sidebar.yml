@@ -1,0 +1,8 @@
+website:
+  sidebar:
+    contents:
+      - index.ipynb
+      - 00_comm.ipynb
+      - 01_reacton.ipynb
+      - 02_widget_history.ipynb
+      - 03_ipywatch.ipynb

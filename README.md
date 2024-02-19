@@ -8,6 +8,9 @@ working with IPyWidgets, Reacton, and Solara.
 The lib monitors state changes at ipywidgets level by listening to the
 [Comm API](https://jupyter-notebook.readthedocs.io/en/4.x/comms.html)
 
+![Usage
+example](https://github.com/itepifanio/ipywatch/blob/main/assets/ipywatch.gif?raw=true)
+
 ## Installing
 
 `pip install ipywatch`
