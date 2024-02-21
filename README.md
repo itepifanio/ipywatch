@@ -14,3 +14,7 @@ example](https://github.com/itepifanio/ipywatch/blob/main/assets/ipywatch.gif?ra
 ## Installing
 
 `pip install ipywatch`
+
+or
+
+`pip install ipywatch[reacton]` if you’re using solara or reacton

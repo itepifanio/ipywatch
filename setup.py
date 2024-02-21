@@ -22,7 +22,7 @@ licenses = {
 }
 statuses = [ '1 - Planning', '2 - Pre-Alpha', '3 - Alpha',
     '4 - Beta', '5 - Production/Stable', '6 - Mature', '7 - Inactive' ]
-py_versions = '3.6 3.7 3.8 3.9 3.10'.split()
+py_versions = '3.9 3.10 3.11 3.12'.split()
 
 requirements = shlex.split(cfg.get('requirements', ''))
 if cfg.get('pip_requirements'): requirements += shlex.split(cfg.get('pip_requirements', ''))
@@ -42,7 +42,10 @@ setuptools.setup(
     packages = setuptools.find_packages(),
     include_package_data = True,
     install_requires = requirements,
-    extras_require={ 'dev': dev_requirements },
+    extras_require={
+        'dev': dev_requirements,
+        'reacton': ['reacton>=1.7.0']
+    },
     dependency_links = cfg.get('dep_links','').split(),
     python_requires  = '>=' + cfg['min_python'],
     long_description = open('README.md', encoding='utf-8').read(),
@@ -53,5 +56,3 @@ setuptools.setup(
         'nbdev': [f'{cfg.get("lib_path")}={cfg.get("lib_path")}._modidx:d']
     },
     **setup_cfg)
-
-
