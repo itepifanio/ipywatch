@@ -44,7 +44,8 @@ setuptools.setup(
     install_requires = requirements,
     extras_require={
         'dev': dev_requirements,
-        'reacton': ['reacton>=1.7.0']
+        'reacton': ['reacton>=1.7.0'],
+        'solara': ['solara>=1.12.0'],
     },
     dependency_links = cfg.get('dep_links','').split(),
     python_requires  = '>=' + cfg['min_python'],
