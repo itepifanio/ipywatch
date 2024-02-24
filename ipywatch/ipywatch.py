@@ -4,11 +4,12 @@
 __all__ = ['WidgetStateHistoryListener', 'Ipywatch']
 
 # %% ../nbs/03_ipywatch.ipynb 3
-from typing import Any, Callable, List
+from typing import Any, Callable
 
 import ipywidgets
-from ipykernel.comm import Comm
-from ipywidgets import HBox, VBox, Label, Output, Button, Text, Tab, Layout
+from comm.base_comm import BaseComm
+from ipywidgets.widgets import widget as widget_module
+from ipywidgets import HBox, Output, Layout
 
 from ipywatch.history import WidgetStateHistory
 
@@ -23,12 +24,12 @@ class WidgetStateHistoryListener:
         self.history = WidgetStateHistory(history_size)
         self.on_state_change = on_state_change
 
-        _original_send = Comm.send
+        _original_send = BaseComm.send
 
         def _patched_send(comm, data=None, metadata=None, buffers=None):
             comm_id = comm.comm_id
 
-            widget = ipywidgets.Widget.widgets.get(comm_id)
+            widget = widget_module._instances.get(comm_id)
 
             self.history.set_state(comm_id, data)
 
@@ -37,7 +38,7 @@ class WidgetStateHistoryListener:
 
             _original_send(comm, data, metadata, buffers)
 
-        Comm.send = _patched_send
+        BaseComm.send = _patched_send
 
 # %% ../nbs/03_ipywatch.ipynb 5
 class Ipywatch(HBox):
