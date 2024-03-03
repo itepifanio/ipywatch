@@ -4,7 +4,7 @@
 __all__ = ['WidgetStateHistoryListener', 'Ipywatch']
 
 # %% ../nbs/03_ipywatch.ipynb 3
-from typing import Any, Callable
+from typing import Any, Callable, Optional
 
 import ipywidgets
 from comm.base_comm import BaseComm
@@ -16,9 +16,9 @@ from ipywatch.history import WidgetStateHistory
 # %% ../nbs/03_ipywatch.ipynb 4
 class WidgetStateHistoryListener:
     def __init__(
-        self, 
-        history_size: int = 5, 
-        on_state_change: Callable[[ipywidgets.Widget, Any], None]=None
+        self,
+        history_size: int = 5,
+        on_state_change: Optional[Callable[[ipywidgets.Widget, Any], None]] = None
     ):
         self.history_size = history_size
         self.history = WidgetStateHistory(history_size)
