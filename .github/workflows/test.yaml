@@ -20,6 +20,9 @@ jobs:
       - name: Run lint
         run: |
           nbqa ruff --fix nbs/*.ipynb -v
+      - name: Run mypy
+        run: |
+          nbqa mypy nbs/*.ipynb --ignore-missing-imports
       - name: Run Tests
         run: |
           nbdev_test
