@@ -38,7 +38,7 @@ class WidgetStateHistoryListener:
 
             _original_send(comm, data, metadata, buffers)
 
-        BaseComm.send = _patched_send
+        BaseComm.send = _patched_send  # type: ignore
 
 # %% ../nbs/03_ipywatch.ipynb 5
 class Ipywatch(HBox):
