@@ -5,7 +5,7 @@ __all__ = ['WidgetStateHistory']
 
 # %% ../nbs/02_widget_history.ipynb 3
 from collections import deque
-from typing import Any, Deque, Dict, Iterator
+from typing import Any, Dict, Iterator
 
 # %% ../nbs/02_widget_history.ipynb 4
 class WidgetStateHistory:
