@@ -22,7 +22,7 @@ jobs:
           nbqa ruff --fix nbs/*.ipynb -v
       - name: Run mypy
         run: |
-          nbqa mypy nbs/*.ipynb --ignore-missing-imports
+          nbqa mypy nbs/*.ipynb
       - name: Run Tests
         run: |
           nbdev_test
