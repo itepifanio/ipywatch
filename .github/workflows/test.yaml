@@ -17,6 +17,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -U nbdev
           pip install -e ".[dev]"
+      - name: Run lint
+        run: |
+          nbqa ruff --fix nbs/*.ipynb -v
       - name: Run Tests
         run: |
           nbdev_test
