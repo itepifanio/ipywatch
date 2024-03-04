@@ -1,0 +1,92 @@
+[
+  {
+    "objectID": "ipywatch.html",
+    "href": "ipywatch.html",
+    "title": "Ipywatch",
+    "section": "",
+    "text": "Widget to watch comm events\nsource",
+    "crumbs": [
+      "Ipywatch"
+    ]
+  },
+  {
+    "objectID": "ipywatch.html#usage-example",
+    "href": "ipywatch.html#usage-example",
+    "title": "Ipywatch",
+    "section": "Usage example",
+    "text": "Usage example\n\nipywatch = Ipywatch(width='100%', height='200px')\nslider = ipywidgets.IntSlider(value=7, min=0, max=10, step=1, description='Test Slider:')\nHBox([slider, ipywatch])",
+    "crumbs": [
+      "Ipywatch"
+    ]
+  },
+  {
+    "objectID": "comm.html",
+    "href": "comm.html",
+    "title": "Comm",
+    "section": "",
+    "text": "Ipykernel employs the Comm class for facilitating communication between the front-end and back-end. It builds on a base Comm implementation, which includes a send function for messaging the front-end. Monkey-patching this send function presents a direct approach to intercept Comm communications.\n_original_send = BaseComm.send\n\ndef _patched_send(self, data=None, metadata=None, buffers=None):\n    widget = widget_module._instances.get(self.comm_id)\n    widget_type = type(widget).__name__ if widget else \"Unknown\"\n    print(f\"Comm message sent by {widget_type} ({self.comm_id}): {data}\")\n\n    _original_send(self, data, metadata, buffers)\n\nBaseComm.send = _patched_send  # type: ignore",
+    "crumbs": [
+      "Comm"
+    ]
+  },
+  {
+    "objectID": "comm.html#testing",
+    "href": "comm.html#testing",
+    "title": "Comm",
+    "section": "Testing",
+    "text": "Testing\nThe following cells displays ipywidgets and solara example of monitoring state changes. Interact with the following widgets to intercept its state changes.\n\nslider = widgets.IntSlider(value=7, min=0, max=10, step=1, description='Test Slider:')\ndisplay(slider)\n\n\nint_value = solara.reactive(42)\nsolara.SliderInt(\"Another Test Slider:\", value=int_value, min=-10, max=120)",
+    "crumbs": [
+      "Comm"
+    ]
+  },
+  {
+    "objectID": "widget_history.html",
+    "href": "widget_history.html",
+    "title": "Widget history",
+    "section": "",
+    "text": "Store a fixed number of stored states in-memory\n\nsource\n\nWidgetStateHistory\n\n WidgetStateHistory (history_size:int=5)\n\nInitialize self. See help(type(self)) for accurate signature.\n\nwidget_states = WidgetStateHistory(history_size=5)\n\nwidget_states[\"widget_1\"] = {\"value\": 10}\nwidget_states[\"widget_1\"] = {\"value\": 20}\nassert len(widget_states) == 1\nassert widget_states['widget_1'] == {\"value\": 20}\n\ndel widget_states[\"widget_1\"]    \nassert len(widget_states) == 0",
+    "crumbs": [
+      "Widget history"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Ipywatch",
+    "section": "",
+    "text": "Welcome to the Ipywatch project a debugging solution for developers working with IPyWidgets, Reacton, and Solara.\nThe lib monitors state changes at ipywidgets level by listening to the Comm API",
+    "crumbs": [
+      "Ipywatch"
+    ]
+  },
+  {
+    "objectID": "index.html#installing",
+    "href": "index.html#installing",
+    "title": "Ipywatch",
+    "section": "Installing",
+    "text": "Installing\npip install ipywatch",
+    "crumbs": [
+      "Ipywatch"
+    ]
+  },
+  {
+    "objectID": "reacton.html",
+    "href": "reacton.html",
+    "title": "Reacton",
+    "section": "",
+    "text": "Adding a pre_render hook to reacton codebase we’re able to track each state change at component level.\n_original_render = _RenderContext.render\n\ndef pre_render(self, element: Element, container: widgets.Widget = None):\n    print(f'state::{self.state_get()}\\n')\n    print(f'element: {element.component} --- {element.component.name}, {element.component.value_name}, {element.component.widget}\\n')\n    if container is not None:\n        print(f'model_id::{container.model_id}')\n\ndef _patched_render(self, element: Element, container: widgets.Widget = None):\n    pre_render(self, element, container)\n    \n    _original_render(self, element, container)\n\n_RenderContext.render = _patched_render  # type: ignore",
+    "crumbs": [
+      "Reacton"
+    ]
+  },
+  {
+    "objectID": "reacton.html#testing",
+    "href": "reacton.html#testing",
+    "title": "Reacton",
+    "section": "Testing",
+    "text": "Testing\nThe following cells displays ipywidgets an solara example of monitoring state changes. Interact with the following widgets to intercept its state changes.\n\nint_value = solara.reactive(0)\nslider = solara.SliderInt(\"Another Test Slider:\", value=int_value, min=0, max=10)",
+    "crumbs": [
+      "Reacton"
+    ]
+  }
+]
