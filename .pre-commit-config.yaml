@@ -1,0 +1,18 @@
+repos:
+  - repo: local
+    hooks:
+      - id: run-lint
+        name: Run lint
+        entry: bash -c 'nbqa ruff --fix nbs/*.ipynb'
+        language: system
+        pass_filenames: false
+      - id: run-mypy
+        name: Run mypy
+        entry: bash -c 'nbqa mypy nbs/*.ipynb'
+        language: system
+        pass_filenames: false
+      - id: run-tests
+        name: Run Tests
+        entry: nbdev_test
+        language: system
+        pass_filenames: false
